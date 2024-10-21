@@ -6,6 +6,8 @@ import java.util.Map;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Disposable;
 
+import me.rochblondiaux.supermarioworld.model.Renderable;
+
 public class ScreenManager implements Disposable {
 
     private final Map<ScreenType, Screen> screens = new HashMap<>();
@@ -19,7 +21,7 @@ public class ScreenManager implements Disposable {
         return this.screens.get(screenType);
     }
 
-    public Screen getCurrentScreen() {
+    public Screen currentScreen() {
         return this.screens.get(this.currentScreen);
     }
 
@@ -43,7 +45,14 @@ public class ScreenManager implements Disposable {
         Screen screen = this.screens.get(screenType);
         if (screen == null)
             return;
+
+        // Handle last screen
+        Screen currentScreen = this.screens.get(this.currentScreen);
+        if (currentScreen != null)
+            currentScreen.hide();
+
         this.currentScreen = screenType;
+        screen.show();
     }
 
     public void pause() {

@@ -1,0 +1,33 @@
+main.png
+size: 512, 818
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+background
+  rotate: false
+  xy: 0, 0
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+copyright
+  rotate: false
+  xy: 0, 512
+  size: 151, 8
+  orig: 151, 8
+  offset: 0, 0
+  index: -1
+frame
+  rotate: false
+  xy: 151, 512
+  size: 256, 240
+  orig: 256, 240
+  offset: 0, 0
+  index: -1
+title
+  rotate: false
+  xy: 0, 752
+  size: 209, 66
+  orig: 209, 66
+  offset: 0, 0
+  index: -1

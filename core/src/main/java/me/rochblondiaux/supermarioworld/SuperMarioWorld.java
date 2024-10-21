@@ -2,6 +2,7 @@ package me.rochblondiaux.supermarioworld;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -25,6 +26,9 @@ public class SuperMarioWorld extends ApplicationAdapter {
     // Batch
     private SpriteBatch batch;
 
+    // Camera
+    private OrthographicCamera camera;
+
     @Override
     public void create() {
         instance = this;
@@ -32,12 +36,15 @@ public class SuperMarioWorld extends ApplicationAdapter {
         // Batch
         this.batch = new SpriteBatch();
 
+        // Camera
+        this.camera = new OrthographicCamera();
+        this.camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         // Screen
         this.screens = new ScreenManager();
         this.screens.register(ScreenType.MAIN, new MainMenuScreen(this));
         this.screens.register(ScreenType.GAME, new MainMenuScreen(this));
         this.screens.setCurrentScreen(ScreenType.MAIN);
-
     }
 
     @Override
