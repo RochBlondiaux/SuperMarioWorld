@@ -2,33 +2,72 @@ package me.rochblondiaux.supermarioworld;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
+import lombok.Getter;
+import me.rochblondiaux.supermarioworld.screen.ScreenManager;
+import me.rochblondiaux.supermarioworld.screen.ScreenType;
+import me.rochblondiaux.supermarioworld.screen.implementation.MainMenuScreen;
+
+/**
+ * {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms.
+ */
+@Getter
 public class SuperMarioWorld extends ApplicationAdapter {
+
+    @Getter
+    private static SuperMarioWorld instance;
+
+    // Screen
+    private ScreenManager screens;
+
+    // Batch
     private SpriteBatch batch;
-    private Texture image;
 
     @Override
     public void create() {
-        batch = new SpriteBatch();
-        image = new Texture("libgdx.png");
+        instance = this;
+
+        // Batch
+        this.batch = new SpriteBatch();
+
+        // Screen
+        this.screens = new ScreenManager();
+        this.screens.register(ScreenType.MAIN, new MainMenuScreen(this));
+        this.screens.register(ScreenType.GAME, new MainMenuScreen(this));
+        this.screens.setCurrentScreen(ScreenType.MAIN);
+
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        this.screens.resize(width, height);
+    }
+
+    @Override
+    public void pause() {
+        this.screens.pause();
+    }
+
+    @Override
+    public void resume() {
+        this.screens.resume();
     }
 
     @Override
     public void render() {
+        float delta = Gdx.graphics.getDeltaTime();
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        batch.begin();
-        batch.draw(image, 140, 210);
-        batch.end();
+
+        this.screens.render(delta);
     }
 
     @Override
     public void dispose() {
-        batch.dispose();
-        image.dispose();
+        this.screens.dispose();
+        this.batch.dispose();
+
+        instance = null;
     }
 }
