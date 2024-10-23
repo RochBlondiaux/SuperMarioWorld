@@ -10,6 +10,8 @@ dependencies {
   compileOnly 'org.projectlombok:lombok:1.18.34'
   annotationProcessor 'org.projectlombok:lombok:1.18.34'
 
+  implementation 'com.github.RedSponge:ldtk-gdx:v0.2'
+
   if(enableGraalNative == 'true') {
     implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
   }

@@ -1,0 +1,152 @@
+player.png
+size: 60, 117
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+duck
+  rotate: false
+  xy: 0, 0
+  size: 15, 14
+  orig: 15, 14
+  offset: 0, 0
+  index: -1
+fall
+  rotate: false
+  xy: 0, 54
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: -1
+idle
+  rotate: false
+  xy: 16, 54
+  size: 14, 20
+  orig: 14, 20
+  offset: 0, 0
+  index: -1
+jump
+  rotate: false
+  xy: 37, 95
+  size: 16, 22
+  orig: 16, 22
+  offset: 0, 0
+  index: -1
+kick
+  rotate: false
+  xy: 30, 54
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: -1
+look-up
+  rotate: false
+  xy: 30, 74
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+pipe
+  rotate: false
+  xy: 46, 54
+  size: 14, 20
+  orig: 14, 20
+  offset: 0, 0
+  index: -1
+run-jump
+  rotate: false
+  xy: 0, 74
+  size: 15, 20
+  orig: 15, 20
+  offset: 0, 0
+  index: -1
+run
+  rotate: false
+  xy: 19, 16
+  size: 16, 19
+  orig: 16, 19
+  offset: 0, 0
+  index: 0
+run
+  rotate: false
+  xy: 35, 16
+  size: 16, 19
+  orig: 16, 19
+  offset: 0, 0
+  index: 1
+run
+  rotate: false
+  xy: 15, 74
+  size: 15, 20
+  orig: 15, 20
+  offset: 0, 0
+  index: 2
+skid
+  rotate: false
+  xy: 45, 74
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+slide
+  rotate: false
+  xy: 0, 35
+  size: 15, 19
+  orig: 15, 19
+  offset: 0, 0
+  index: -1
+victory
+  rotate: false
+  xy: 0, 95
+  size: 16, 21
+  orig: 16, 21
+  offset: 0, 0
+  index: -1
+walk
+  rotate: false
+  xy: 15, 35
+  size: 15, 19
+  orig: 15, 19
+  offset: 0, 0
+  index: 0
+walk
+  rotate: false
+  xy: 30, 35
+  size: 15, 19
+  orig: 15, 19
+  offset: 0, 0
+  index: 1
+walk
+  rotate: false
+  xy: 45, 35
+  size: 15, 19
+  orig: 15, 19
+  offset: 0, 0
+  index: 2
+wall-run
+  rotate: false
+  xy: 16, 95
+  size: 21, 21
+  orig: 21, 21
+  offset: 0, 0
+  index: 0
+wall-run
+  rotate: false
+  xy: 35, 0
+  size: 19, 16
+  orig: 19, 16
+  offset: 0, 0
+  index: 1
+wall-run
+  rotate: false
+  xy: 0, 16
+  size: 19, 16
+  orig: 19, 16
+  offset: 0, 0
+  index: 2
+wall-run
+  rotate: false
+  xy: 15, 0
+  size: 20, 15
+  orig: 20, 15
+  offset: 0, 0
+  index: 3

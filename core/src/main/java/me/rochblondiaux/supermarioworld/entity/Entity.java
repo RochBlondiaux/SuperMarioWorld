@@ -38,6 +38,7 @@ public abstract class Entity implements Disposable, Renderable, Updatable {
         this.uniqueId = UUID.randomUUID();
         this.world = world;
         this.body = body;
+        this.create();
     }
 
     public void create() {

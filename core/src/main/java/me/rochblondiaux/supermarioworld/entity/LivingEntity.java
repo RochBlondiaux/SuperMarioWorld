@@ -13,17 +13,16 @@ import me.rochblondiaux.supermarioworld.graphics.animation.AnimationController;
 public class LivingEntity extends Entity {
 
     // Animation
-    private final AnimationController<?> animations;
+    protected AnimationController<?> animations;
 
     // State
     private int health;
     private int maxHealth;
 
-    public LivingEntity(World world, Body body, int maxHealth, AnimationController<?> controller) {
+    public LivingEntity(World world, Body body, int maxHealth) {
         super(world, body);
         this.health = maxHealth;
         this.maxHealth = maxHealth;
-        this.animations = controller;
     }
 
     public void damage(int damage) {

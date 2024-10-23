@@ -40,13 +40,6 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        // Switch to game screen
-        // TODO: make a selection menu instead
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
-            this.game.screens().setCurrentScreen(ScreenType.GAME);
-            return;
-        }
-
         SpriteBatch batch = this.game.batch();
 
         // Clear screen
@@ -77,6 +70,12 @@ public class MainMenuScreen implements Screen {
         batch.draw(copyright, width / 2f - copyrightWidth / 2f, copyrightHeight * 6, copyrightWidth, copyrightHeight);
 
         batch.end();
+
+        // Switch to game screen
+        // TODO: make a selection menu instead
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
+            this.game.screens().setCurrentScreen(ScreenType.GAME);
+        }
     }
 
     @Override

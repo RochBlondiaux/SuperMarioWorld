@@ -9,7 +9,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import lombok.Getter;
 import me.rochblondiaux.supermarioworld.screen.ScreenManager;
 import me.rochblondiaux.supermarioworld.screen.ScreenType;
+import me.rochblondiaux.supermarioworld.screen.implementation.GameScreen;
 import me.rochblondiaux.supermarioworld.screen.implementation.MainMenuScreen;
+import me.rochblondiaux.supermarioworld.screen.implementation.PauseMenuScreen;
 
 /**
  * {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms.
@@ -43,7 +45,8 @@ public class SuperMarioWorld extends ApplicationAdapter {
         // Screen
         this.screens = new ScreenManager();
         this.screens.register(ScreenType.MAIN, new MainMenuScreen(this));
-        this.screens.register(ScreenType.GAME, new MainMenuScreen(this));
+        this.screens.register(ScreenType.GAME, new GameScreen(this));
+        this.screens.register(ScreenType.PAUSE, new PauseMenuScreen(this));
         this.screens.setCurrentScreen(ScreenType.MAIN);
     }
 
