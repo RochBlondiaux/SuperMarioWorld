@@ -1,4 +1,4 @@
-package me.rochblondiaux.supermarioworld.entity;
+package me.rochblondiaux.supermarioworld.entity.living;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -6,6 +6,8 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.rochblondiaux.supermarioworld.entity.Entity;
+import me.rochblondiaux.supermarioworld.entity.EntityType;
 import me.rochblondiaux.supermarioworld.graphics.animation.AnimationController;
 
 @Getter
@@ -19,8 +21,8 @@ public class LivingEntity extends Entity {
     private int health;
     private int maxHealth;
 
-    public LivingEntity(World world, Body body, int maxHealth) {
-        super(world, body);
+    public LivingEntity(World world, EntityType type, Body body, int maxHealth) {
+        super(world, type, body);
         this.health = maxHealth;
         this.maxHealth = maxHealth;
     }

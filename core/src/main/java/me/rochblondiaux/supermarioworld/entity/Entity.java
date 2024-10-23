@@ -19,6 +19,7 @@ public abstract class Entity implements Disposable, Renderable, Updatable {
 
     // Definition
     protected final UUID uniqueId;
+    protected final EntityType type;
     protected final World world;
     protected Body body;
     protected float speed = 1f;
@@ -34,8 +35,9 @@ public abstract class Entity implements Disposable, Renderable, Updatable {
     protected float airTicks;
     protected FacingDirection direction = FacingDirection.RIGHT;
 
-    public Entity(World world, Body body) {
+    public Entity(World world, EntityType type, Body body) {
         this.uniqueId = UUID.randomUUID();
+        this.type = type;
         this.world = world;
         this.body = body;
         this.create();

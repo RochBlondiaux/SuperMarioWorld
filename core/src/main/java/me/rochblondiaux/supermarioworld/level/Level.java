@@ -7,7 +7,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -18,10 +18,9 @@ import com.redsponge.ldtkgdx.*;
 import lombok.Getter;
 import me.rochblondiaux.supermarioworld.SuperMarioWorld;
 import me.rochblondiaux.supermarioworld.entity.Entity;
-import me.rochblondiaux.supermarioworld.entity.Player;
+import me.rochblondiaux.supermarioworld.entity.living.Player;
 import me.rochblondiaux.supermarioworld.model.Renderable;
 import me.rochblondiaux.supermarioworld.model.Updatable;
-import me.rochblondiaux.supermarioworld.utils.BodyHelper;
 import me.rochblondiaux.supermarioworld.utils.Constants;
 
 @Getter
@@ -56,26 +55,26 @@ public class Level implements Renderable, Updatable, Disposable {
         for (LDTKEntityLayer entityLayer : level.getEntityLayers()) {
             Array<LDTKEntity> players = entityLayer.getEntitiesOfType("Player");
             for (LDTKEntity player : players) {
-                Body body = BodyHelper.createBody(
-                    player.getX() + 8,
-                    player.getY() + 8,
-                    16,
-                    16,
-                    false,
-                    this.world
-                );
+                Body body = this.game.bodyManager()
+                    .make(Player.class, world, new Rectangle(player.getX(), player.getY(), 16, 16));
                 this.player = new Player(world, body);
                 this.entities.add(this.player);
             }
         }
 
-        // Collisions
+        // World collisions
         LDTKLayer groundLayer = level.getLayerByName("Ground");
         if (groundLayer instanceof LDTKTileLayer) {
             LDTKTileLayer tileLayer = (LDTKTileLayer) groundLayer;
-            Vector2 tileSize = new Vector2(tileLayer.getGridSize(), tileLayer.getGridSize());
             for (LDTKTile region : tileLayer.getRegions()) {
-                BodyHelper.createStaticBody(world, tileSize, region);
+                Rectangle rectangle = new Rectangle(
+                    region.getX(),
+                    region.getY(),
+                    tileLayer.getGridSize(),
+                    tileLayer.getGridSize()
+                );
+
+                this.game.bodyManager().make(LDTKTile.class, this.world, rectangle);
             }
         }
 

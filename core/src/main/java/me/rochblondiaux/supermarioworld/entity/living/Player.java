@@ -1,4 +1,4 @@
-package me.rochblondiaux.supermarioworld.entity;
+package me.rochblondiaux.supermarioworld.entity.living;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
+import me.rochblondiaux.supermarioworld.entity.EntityType;
 import me.rochblondiaux.supermarioworld.graphics.animation.AnimationController;
 
 public class Player extends LivingEntity {
@@ -14,7 +15,7 @@ public class Player extends LivingEntity {
     private int jumps;
 
     public Player(World world, Body body) {
-        super(world, body, 20);
+        super(world, EntityType.PLAYER, body, 20);
         this.animations = new AnimationController<>(
             this,
             new TextureAtlas(Gdx.files.internal("sprites/player.txt")),
