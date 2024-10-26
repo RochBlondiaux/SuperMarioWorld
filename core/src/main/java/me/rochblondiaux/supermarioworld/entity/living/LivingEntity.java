@@ -1,14 +1,15 @@
 package me.rochblondiaux.supermarioworld.entity.living;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
 
 import lombok.Getter;
 import lombok.Setter;
 import me.rochblondiaux.supermarioworld.entity.Entity;
 import me.rochblondiaux.supermarioworld.entity.EntityType;
 import me.rochblondiaux.supermarioworld.graphics.animation.AnimationController;
+import me.rochblondiaux.supermarioworld.level.Level;
 
 @Getter
 @Setter
@@ -21,8 +22,8 @@ public class LivingEntity extends Entity {
     private int health;
     private int maxHealth;
 
-    public LivingEntity(World world, EntityType type, Body body, int maxHealth) {
-        super(world, type, body);
+    public LivingEntity(Level level, EntityType type, Body body, RectangleMapObject source, int maxHealth) {
+        super(level, type, body, source);
         this.health = maxHealth;
         this.maxHealth = maxHealth;
     }

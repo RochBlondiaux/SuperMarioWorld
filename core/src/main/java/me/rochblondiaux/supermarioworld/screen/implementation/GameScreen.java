@@ -1,6 +1,7 @@
 package me.rochblondiaux.supermarioworld.screen.implementation;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import me.rochblondiaux.supermarioworld.SuperMarioWorld;
 import me.rochblondiaux.supermarioworld.level.Level;
+import me.rochblondiaux.supermarioworld.screen.ScreenType;
 import me.rochblondiaux.supermarioworld.utils.Constants;
 
 public class GameScreen implements Screen {
@@ -29,7 +31,7 @@ public class GameScreen implements Screen {
         this.level = new Level(
             game,
             world,
-            Gdx.files.internal("maps/level-1.ldtk")
+            "maps/level-0.tmx"
         );
     }
 
@@ -60,6 +62,10 @@ public class GameScreen implements Screen {
 
         // Debug
         debugRenderer.render(this.level.world(), this.game.camera().combined.scl(Constants.PPM));
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            this.game.screens().setCurrentScreen(ScreenType.PAUSE);
+        }
     }
 
     @Override

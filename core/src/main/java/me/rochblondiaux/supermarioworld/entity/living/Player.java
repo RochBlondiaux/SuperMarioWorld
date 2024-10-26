@@ -3,25 +3,36 @@ package me.rochblondiaux.supermarioworld.entity.living;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.rochblondiaux.supermarioworld.entity.EntityType;
+import me.rochblondiaux.supermarioworld.entity.factory.EntityFactory;
 import me.rochblondiaux.supermarioworld.graphics.animation.AnimationController;
+import me.rochblondiaux.supermarioworld.level.Level;
+import me.rochblondiaux.supermarioworld.utils.Constants;
 
+@Getter
+@Setter
 public class Player extends LivingEntity {
 
-    private int jumps;
+    public static final EntityFactory<Player> FACTORY = Player::new;
 
-    public Player(World world, Body body) {
-        super(world, EntityType.PLAYER, body, 20);
+    private int jumps;
+    private int coins;
+
+    public Player(Level level, Body body, RectangleMapObject source) {
+        super(level, EntityType.PLAYER, body, source, 20);
         this.animations = new AnimationController<>(
             this,
             new TextureAtlas(Gdx.files.internal("sprites/player.txt")),
             true
         );
         this.speed = 4;
+        this.size = new Vector2(16, 16);
     }
 
     @Override
@@ -39,7 +50,7 @@ public class Player extends LivingEntity {
             velocity.x = -1;
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && jumps < 2) {
-            float force = body.getMass() * 6;
+            float force = body.getMass() * Constants.JUMP_FORCE;
             body.setLinearVelocity(body.getLinearVelocity().x, 0);
             body.applyLinearImpulse(new Vector2(0, force), body.getWorldCenter(), true);
             jumps++;

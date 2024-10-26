@@ -5,13 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.redsponge.ldtkgdx.LDTKTile;
 
 import lombok.Getter;
-import me.rochblondiaux.supermarioworld.entity.living.LivingEntity;
-import me.rochblondiaux.supermarioworld.physics.BodyManager;
-import me.rochblondiaux.supermarioworld.physics.implementation.LivingEntityBodyFactory;
-import me.rochblondiaux.supermarioworld.physics.implementation.TileBodyFactory;
 import me.rochblondiaux.supermarioworld.screen.ScreenManager;
 import me.rochblondiaux.supermarioworld.screen.ScreenType;
 import me.rochblondiaux.supermarioworld.screen.implementation.GameScreen;
@@ -30,8 +25,6 @@ public class SuperMarioWorld extends ApplicationAdapter {
     // Screen
     private ScreenManager screens;
 
-    // Body
-    private BodyManager bodyManager;
 
     // Batch
     private SpriteBatch batch;
@@ -49,11 +42,6 @@ public class SuperMarioWorld extends ApplicationAdapter {
         // Camera
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        // Body
-        this.bodyManager = new BodyManager();
-        this.bodyManager.register(LDTKTile.class, new TileBodyFactory());
-        this.bodyManager.register(LivingEntity.class, new LivingEntityBodyFactory());
 
         // Screen
         this.screens = new ScreenManager();

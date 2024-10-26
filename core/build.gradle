@@ -6,11 +6,11 @@ dependencies {
   api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
   api "com.badlogicgames.gdx:gdx:$gdxVersion"
   api "com.github.tommyettinger:anim8-gdx:$anim8Version"
+  api "com.github.tommyettinger:libgdx-utils:0.13.7"
+  api "com.github.tommyettinger:libgdx-utils-box2d:0.13.7"
 
   compileOnly 'org.projectlombok:lombok:1.18.34'
   annotationProcessor 'org.projectlombok:lombok:1.18.34'
-
-  implementation 'com.github.RedSponge:ldtk-gdx:v0.2'
 
   if(enableGraalNative == 'true') {
     implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
