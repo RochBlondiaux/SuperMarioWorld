@@ -12,6 +12,7 @@ import me.rochblondiaux.supermarioworld.entity.Entity;
 import me.rochblondiaux.supermarioworld.entity.interactable.Interactable;
 import me.rochblondiaux.supermarioworld.entity.living.Player;
 import me.rochblondiaux.supermarioworld.level.Level;
+import me.rochblondiaux.supermarioworld.model.Direction;
 
 @RequiredArgsConstructor
 public class InteractableListener implements ContactListener {
@@ -39,7 +40,17 @@ public class InteractableListener implements ContactListener {
         Player player = entityA instanceof Player ? (Player) entityA : (Player) entityB;
         Interactable collectable = entityA instanceof Interactable ? (Interactable) entityA : (Interactable) entityB;
 
-        collectable.interact(player);
+        // Get direction
+        Direction direction = Direction.UP;
+        if (player.position().x + player.size().x / 2 < collectable.position().x - collectable.size().x / 2)
+            direction = Direction.LEFT;
+        else if (player.position().x - player.size().x / 2 > collectable.position().x + collectable.size().x / 2)
+            direction = Direction.RIGHT;
+        else if (player.position().y + player.size().y / 2 < collectable.position().y - collectable.size().y / 2)
+            direction = Direction.DOWN;
+
+        // Interact
+        collectable.interact(player, direction);
 
         contact.setEnabled(false);
     }

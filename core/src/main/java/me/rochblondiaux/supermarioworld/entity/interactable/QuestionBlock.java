@@ -1,5 +1,7 @@
 package me.rochblondiaux.supermarioworld.entity.interactable;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -9,6 +11,7 @@ import me.rochblondiaux.supermarioworld.entity.EntityType;
 import me.rochblondiaux.supermarioworld.entity.factory.EntityFactory;
 import me.rochblondiaux.supermarioworld.entity.living.Player;
 import me.rochblondiaux.supermarioworld.level.Level;
+import me.rochblondiaux.supermarioworld.model.Direction;
 
 public class QuestionBlock extends Interactable {
 
@@ -16,13 +19,17 @@ public class QuestionBlock extends Interactable {
 
     private boolean empty;
 
+    private final Sound appearSound;
+
     public QuestionBlock(Level level, Body body, RectangleMapObject source) {
         super(level, EntityType.QUESTION_BLOCK, body, source, "sprites/interactable/question-block.txt");
+
+        this.appearSound = Gdx.audio.newSound(Gdx.files.internal("sounds/power-up_appears.wav"));
     }
 
     @Override
-    public void interact(Player player) {
-        if (player.position().y > this.position.y || this.empty)
+    public void interact(Player player, Direction direction) {
+        if (this.empty || direction != Direction.DOWN)
             return;
 
         // Update state
@@ -41,6 +48,8 @@ public class QuestionBlock extends Interactable {
             16
         );
 
+        this.appearSound.play();
+
         this.level.addEntity(entityType, rectangle)
             .thenAccept(entity -> {
                 entity.body().setLinearVelocity(0, 1);
@@ -51,5 +60,11 @@ public class QuestionBlock extends Interactable {
                     }
                 }, 0.25f);
             });
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        this.appearSound.dispose();
     }
 }

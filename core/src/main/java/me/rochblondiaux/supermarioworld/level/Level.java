@@ -4,8 +4,10 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -15,18 +17,19 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.rochblondiaux.supermarioworld.SuperMarioWorld;
 import me.rochblondiaux.supermarioworld.entity.Entity;
 import me.rochblondiaux.supermarioworld.entity.EntityType;
 import me.rochblondiaux.supermarioworld.entity.QueuedEntity;
 import me.rochblondiaux.supermarioworld.entity.living.Player;
-import me.rochblondiaux.supermarioworld.graphics.Hud;
 import me.rochblondiaux.supermarioworld.model.Renderable;
 import me.rochblondiaux.supermarioworld.model.Updatable;
 import me.rochblondiaux.supermarioworld.physics.listener.CollectableListener;
@@ -46,19 +49,22 @@ public class Level implements Renderable, Updatable, Disposable {
     private final OrthogonalTiledMapRenderer mapRenderer;
     private final SpriteBatch batch;
     private final ContactMultiplexer contactMultiplexer;
-    private final Hud hud;
 
     private final Set<Entity> entities = new CopyOnWriteArraySet<>();
     private final Queue<QueuedEntity> queuedEntities = new ArrayDeque<>();
 
+    private Vector2 spawnPoint;
+    @Setter
+    private Vector2 checkpoint;
     private Player player;
+
+    private Texture background;
 
     public Level(SuperMarioWorld game, World world, String mapPath) {
         this.game = game;
         this.world = world;
         this.assets = new AssetManager();
         this.batch = new SpriteBatch();
-        this.hud = new Hud(this);
 
         // Map
         this.map = new TmxMapLoader().load(mapPath);
@@ -70,9 +76,12 @@ public class Level implements Renderable, Updatable, Disposable {
         this.contactMultiplexer.add(new InteractableListener(this));
         this.world.setContactListener(this.contactMultiplexer);
 
+        // Assets
+        // TODO: use the assets manager
+        this.background = new Texture(Gdx.files.internal("backgrounds/1.png"));
+        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         this.loadEntities();
         this.loadCollisions();
-        this.hud.loadAssets();
     }
 
     private void loadCollisions() {
@@ -99,13 +108,25 @@ public class Level implements Renderable, Updatable, Disposable {
             Body body = definition.collision().factory().make(world, rectangle);
             Entity entity = definition.factory().make(this, body, rectangle);
             this.entities.add(entity);
-            if (entity instanceof Player)
+            if (entity instanceof Player) {
                 this.player = (Player) entity;
+                this.spawnPoint = new Vector2(entity.body().getPosition());
+            }
         }
     }
 
     @Override
     public void render(SpriteBatch batch) {
+        // Background
+        SpriteBatch gameBatch = this.game.batch();
+        gameBatch.begin();
+
+        // Background
+        gameBatch.draw(this.background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        gameBatch.end();
+
+
         this.batch.begin();
 
         // Map
@@ -115,11 +136,6 @@ public class Level implements Renderable, Updatable, Disposable {
         this.entities.forEach(entity -> entity.render(this.batch));
 
         this.batch.end();
-
-        // Hud
-        this.game.batch().begin();
-        this.hud.render(this.game.batch());
-        this.game.batch().end();
     }
 
     @Override
@@ -184,8 +200,11 @@ public class Level implements Renderable, Updatable, Disposable {
         this.entities.clear();
         this.world.dispose();
         this.mapRenderer.dispose();
-        this.hud.dispose();
         this.batch.dispose();
+    }
+
+    public Vector2 checkpoint() {
+        return this.checkpoint == null ? this.spawnPoint : this.checkpoint;
     }
 
     public <T extends Entity> CompletableFuture<T> addEntity(EntityType type, Rectangle rectangle) {

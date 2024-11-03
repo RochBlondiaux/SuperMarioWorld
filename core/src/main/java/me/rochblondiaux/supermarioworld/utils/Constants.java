@@ -5,7 +5,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class Constants {
 
-    public static final float PPM = 35;
+    public static final float PPM = 45;
     public static final float GRAVITY = -9.81f;
     public static final float JUMP_FORCE = 4.5f;
     public static final float WALK_SPEED = 1.5f;

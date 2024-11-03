@@ -11,6 +11,7 @@ import me.rochblondiaux.supermarioworld.entity.EntityType;
 import me.rochblondiaux.supermarioworld.entity.living.Player;
 import me.rochblondiaux.supermarioworld.graphics.animation.AnimationController;
 import me.rochblondiaux.supermarioworld.level.Level;
+import me.rochblondiaux.supermarioworld.model.Direction;
 
 public abstract class Interactable extends Entity {
 
@@ -21,7 +22,7 @@ public abstract class Interactable extends Entity {
         this.animations = new AnimationController<>(this, new TextureAtlas(Gdx.files.internal(atlasPath)), false);
     }
 
-    public abstract void interact(Player player);
+    public abstract void interact(Player player, Direction direction);
 
     @Override
     public void update(float delta) {

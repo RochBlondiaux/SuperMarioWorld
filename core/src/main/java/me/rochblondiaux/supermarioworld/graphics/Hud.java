@@ -9,13 +9,17 @@ import com.badlogic.gdx.utils.Disposable;
 
 import lombok.RequiredArgsConstructor;
 import me.rochblondiaux.supermarioworld.entity.living.Player;
-import me.rochblondiaux.supermarioworld.level.Level;
 import me.rochblondiaux.supermarioworld.model.Renderable;
+import me.rochblondiaux.supermarioworld.screen.implementation.GameScreen;
 
 @RequiredArgsConstructor
 public class Hud implements Renderable, Disposable {
 
-    private final Level level;
+    private final GameScreen gameScreen;
+
+    // Dimensions
+    private float width;
+    private float height;
 
     // Textures
     private Texture coins;
@@ -26,11 +30,14 @@ public class Hud implements Renderable, Disposable {
         coins = new Texture(Gdx.files.internal("ui/hud/coins.png"));
         smallNumbers = new TextureAtlas(Gdx.files.internal("ui/hud/fonts/small-numbers.txt"));
         marioName = new Texture(Gdx.files.internal("ui/hud/player/mario.png"));
+
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
     }
 
     @Override
     public void render(SpriteBatch batch) {
-        Player player = this.level.player();
+        Player player = this.gameScreen.level().player();
         if (player == null)
             return;
 
@@ -43,22 +50,22 @@ public class Hud implements Renderable, Disposable {
 
 
     private void renderPlayerName(SpriteBatch batch) {
-        float marioNameWidth = marioName.getWidth() * 1.75f;
-        float marioNameHeight = marioName.getHeight() * 1.75f;
+        float marioNameWidth = marioName.getWidth() * 2.25f;
+        float marioNameHeight = marioName.getHeight() * 2.25f;
 
-        batch.draw(marioName, 15, Gdx.graphics.getHeight() - marioNameHeight - 5, marioNameWidth, marioNameHeight);
+        batch.draw(marioName, 15, this.height - marioNameHeight - 5, marioNameWidth, marioNameHeight);
     }
 
     private void renderCoins(Player player, SpriteBatch batch) {
         // Coins
-        float coinsWidth = this.coins.getWidth() * 1.75f;
-        float coinsHeight = this.coins.getHeight() * 1.75f;
-        float coinX = Gdx.graphics.getWidth() - coinsWidth * 4;
-        float coinY = Gdx.graphics.getHeight() - coinsHeight - 5;
+        float coinsWidth = this.coins.getWidth() * 2.25f;
+        float coinsHeight = this.coins.getHeight() * 2.5f;
+        float coinX = this.width - coinsWidth * 4;
+        float coinY = this.height - coinsHeight - 5;
         batch.draw(coins, coinX, coinY, coinsWidth, coinsHeight);
 
         // Draw number of coins
-        this.drawNumber(batch, player.coins(), coinX + coinsWidth + 5, coinY, 1.75f);
+        this.drawNumber(batch, player.coins(), coinX + coinsWidth + 5, coinY, 2.25f);
     }
 
     private void drawNumber(SpriteBatch batch, int number, float x, float y, float scale) {

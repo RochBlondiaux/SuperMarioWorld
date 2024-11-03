@@ -1,0 +1,10 @@
+[
+  {
+    "id": 0,
+    "name": "Yoshi  Island 1",
+    "minimap": "minimap/maps/yoshi-island-1.tmx",
+    "maps": {
+      "1.1": "assets/maps/yoshi-house.tmx"
+    }
+  }
+]

@@ -18,6 +18,6 @@ public class Coin extends Collectable {
 
     @Override
     public void collect(Player player) {
-        player.coins(player.coins() + 1);
+        player.addCoin();
     }
 }
