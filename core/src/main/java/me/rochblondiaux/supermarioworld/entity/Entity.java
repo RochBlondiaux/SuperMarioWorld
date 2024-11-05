@@ -88,10 +88,8 @@ public abstract class Entity implements Disposable, Renderable, Updatable {
     }
 
     public void updatePosition() {
-        // Update the body position
-        float xVelocity = Math.min(Constants.MAX_X_SPEED, Math.abs(velocity.x));
-        float yVelocity = Math.min(Constants.MAX_Y_SPEED, Math.abs(velocity.y));
-        body.setLinearVelocity(xVelocity, yVelocity);
+        // TODO: cap velocity
+        body.setLinearVelocity(velocity.x * speed, velocity.y);
     }
 
     public boolean isFalling() {

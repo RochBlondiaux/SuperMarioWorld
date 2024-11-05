@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import me.rochblondiaux.supermarioworld.entity.EntityType;
 import me.rochblondiaux.supermarioworld.entity.collectable.Apple;
 import me.rochblondiaux.supermarioworld.entity.collectable.Coin;
+import me.rochblondiaux.supermarioworld.entity.enemies.Rex;
 import me.rochblondiaux.supermarioworld.entity.factory.EntityFactory;
 import me.rochblondiaux.supermarioworld.entity.interactable.QuestionBlock;
 import me.rochblondiaux.supermarioworld.entity.interactable.Trampoline;
@@ -17,7 +18,9 @@ public enum EntityFactoryRegistry {
     COIN("coin", EntityType.COIN, Coin.FACTORY, CollisionRegistry.STATIC_ENTITIES),
     QUESTION_BLOCK("qblock", EntityType.QUESTION_BLOCK, QuestionBlock.FACTORY, CollisionRegistry.STATIC_ENTITIES),
     APPLE("apple", EntityType.APPLE, Apple.FACTORY, CollisionRegistry.STATIC_ENTITIES),
-    TRAMPOLINE("trampoline", EntityType.TRAMPOLINE, Trampoline::new, CollisionRegistry.STATIC_ENTITIES);
+    TRAMPOLINE("trampoline", EntityType.TRAMPOLINE, Trampoline::new, CollisionRegistry.STATIC_ENTITIES),
+    REX("rex", EntityType.REX, Rex::new, CollisionRegistry.DYNAMIC_ENTITIES);
+
 
     private final String id;
     private final EntityType type;

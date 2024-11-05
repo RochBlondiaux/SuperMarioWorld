@@ -20,8 +20,9 @@
   <inherits name="com.github.tommyettinger.anim8" />
   <inherits name="me.rochblondiaux.supermarioworld.SuperMarioWorld" />
   <inherits name="com.redsponge.LDTKGdx"/>
+  <inherits name='com.badlogic.gdx.ai' />
 
-  <!-- You must change this if you rename packages later, or rename GwtLauncher. -->
+    <!-- You must change this if you rename packages later, or rename GwtLauncher. -->
   <entry-point class="me.rochblondiaux.supermarioworld.gwt.GwtLauncher" />
 
   <!-- You usually won't need to make changes to the rest of this. -->

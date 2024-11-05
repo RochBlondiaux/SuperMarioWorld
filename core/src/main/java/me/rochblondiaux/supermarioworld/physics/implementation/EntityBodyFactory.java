@@ -32,9 +32,11 @@ public class EntityBodyFactory implements BodyFactory<RectangleMapObject> {
         shape.setAsBox(rectangle.getWidth() / 2 / Constants.PPM, rectangle.getHeight() / 2 / Constants.PPM);
 
         FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.filter.categoryBits = Constants.BIT_ENTITIES;
         fixtureDef.shape = shape;
         fixtureDef.friction = 0;
         body.createFixture(fixtureDef);
+
         shape.dispose();
 
         return body;

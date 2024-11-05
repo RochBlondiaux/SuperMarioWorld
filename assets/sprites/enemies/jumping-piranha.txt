@@ -1,0 +1,19 @@
+jumping-piranha.png
+size: 16, 48
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack
+  rotate: false
+  xy: 0, 0
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: -1
+idle
+  rotate: false
+  xy: 0, 24
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: -1

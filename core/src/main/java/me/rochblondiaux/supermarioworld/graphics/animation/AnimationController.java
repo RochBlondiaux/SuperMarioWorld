@@ -95,15 +95,13 @@ public class AnimationController<T extends Entity> implements Updatable, Disposa
         TextureRegion currentFrame = currentAnimation.getKeyFrame(stateTime, true);
 
         // Flip texture
-        if (canMove) {
-            if (entity.velocity().x < 0) {
-                if (currentFrame.isFlipX()) {
-                    currentFrame.flip(true, false);
-                }
-            } else if (entity.velocity().x > 0) {
-                if (!currentFrame.isFlipX()) {
-                    currentFrame.flip(true, false);
-                }
+        if (entity.velocity().x < 0) {
+            if (currentFrame.isFlipX()) {
+                currentFrame.flip(true, false);
+            }
+        } else if (entity.velocity().x > 0) {
+            if (!currentFrame.isFlipX()) {
+                currentFrame.flip(true, false);
             }
         }
 

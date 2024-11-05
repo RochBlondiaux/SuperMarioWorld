@@ -15,7 +15,12 @@ public class TileBodyFactory implements BodyFactory<PolygonMapObject> {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         Body body = world.createBody(bodyDef);
         Shape shape = createPolygonShape(source);
-        body.createFixture(shape, 1000);
+        FixtureDef b = new FixtureDef();
+        b.shape = shape;
+        b.density = 1000;
+        b.filter.categoryBits = Constants.BIT_GROUND;
+        body.createFixture(b);
+
         shape.dispose();
 
         return body;

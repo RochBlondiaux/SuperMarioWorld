@@ -1,0 +1,47 @@
+rex.png
+size: 120, 32
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+flat
+  rotate: false
+  xy: 0, 0
+  size: 20, 32
+  orig: 20, 32
+  offset: 0, 0
+  index: 0
+flat
+  rotate: false
+  xy: 20, 0
+  size: 20, 32
+  orig: 20, 32
+  offset: 0, 0
+  index: 1
+flat
+  rotate: false
+  xy: 40, 0
+  size: 20, 32
+  orig: 20, 32
+  offset: 0, 0
+  index: 2
+flat
+  rotate: false
+  xy: 60, 0
+  size: 20, 32
+  orig: 20, 32
+  offset: 0, 0
+  index: 3
+idle
+  rotate: false
+  xy: 80, 0
+  size: 20, 32
+  orig: 20, 32
+  offset: 0, 0
+  index: 0
+idle
+  rotate: false
+  xy: 100, 0
+  size: 20, 32
+  orig: 20, 32
+  offset: 0, 0
+  index: 1

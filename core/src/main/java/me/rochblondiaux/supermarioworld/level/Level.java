@@ -34,6 +34,7 @@ import me.rochblondiaux.supermarioworld.model.Renderable;
 import me.rochblondiaux.supermarioworld.model.Updatable;
 import me.rochblondiaux.supermarioworld.physics.listener.CollectableListener;
 import me.rochblondiaux.supermarioworld.physics.listener.InteractableListener;
+import me.rochblondiaux.supermarioworld.physics.listener.RexListener;
 import me.rochblondiaux.supermarioworld.registry.CollisionRegistry;
 import me.rochblondiaux.supermarioworld.registry.EntityFactoryRegistry;
 import me.rochblondiaux.supermarioworld.utils.Constants;
@@ -74,6 +75,7 @@ public class Level implements Renderable, Updatable, Disposable {
         this.contactMultiplexer = new ContactMultiplexer();
         this.contactMultiplexer.add(new CollectableListener(this));
         this.contactMultiplexer.add(new InteractableListener(this));
+        this.contactMultiplexer.add(new RexListener(this));
         this.world.setContactListener(this.contactMultiplexer);
 
         // Assets

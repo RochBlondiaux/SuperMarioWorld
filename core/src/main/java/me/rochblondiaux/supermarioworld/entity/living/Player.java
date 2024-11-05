@@ -41,6 +41,8 @@ public class Player extends LivingEntity {
         this.speed = 4;
         this.size = new Vector2(16, 16);
 
+        this.body.getFixtureList().get(0).getFilterData().categoryBits = Constants.BIT_PLAYER;
+
         // Sounds
         this.coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
         this.jumpSound = Gdx.audio.newSound(Gdx.files.internal("sounds/jump.wav"));

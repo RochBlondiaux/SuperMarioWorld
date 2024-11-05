@@ -6,4 +6,5 @@ public enum EntityType {
     QUESTION_BLOCK,
     APPLE,
     TRAMPOLINE,
+    REX
 }

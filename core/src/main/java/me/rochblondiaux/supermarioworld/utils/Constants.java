@@ -14,4 +14,8 @@ public class Constants {
     public static final float MAX_X_SPEED = 2.5f;
     public static final float MAX_Y_SPEED = 4.5f;
 
+    public static final short BIT_GROUND = 2;
+    public static final short BIT_ENTITIES = 4;
+    public static final short BIT_PLAYER = 8;
+
 }
